@@ -1,0 +1,23 @@
+echo "Installing Fish..."
+sudo apt-get install fish
+fish_path=$(which fish) 
+
+config_file_dir=~/.config/fish/
+config_file_name=config.fish
+config_file=$config_file_dir$config_file_name
+
+if [ ! -f $config_file ]; then
+	echo "Createing config file '$config_file'..."
+	mkdir -p $config_file_dir
+	echo "set -g -x fish_greeting ''" >> $config_file
+else
+	echo "Found existing config '$config_file'"
+fi
+
+if [ ! $SHELL = $fish_path ];then
+	echo "Changing default shell to fish"
+	chsh -s $fish_path
+	echo "Please logout and in again for changes to take effect"
+else
+	echo "Fish is already default shell"
+fi 
