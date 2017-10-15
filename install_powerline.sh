@@ -2,9 +2,10 @@
 # Variables
 #############################################################
 shells=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-python_version= $2
-fish_config_file=$(which fish)
-bash_config_file=$(which bash)
+python_version=$2
+echo "using python_version $2"
+fish_config_file=~/.config/fish/config.fish
+bash_config_file=~/.bashrc
 #############################################################
 # Installing pip and powerline per user
 #############################################################
@@ -13,8 +14,11 @@ sudo apt-get install python$python_version-pip git
 sudo pip$python_version install --upgrade pip
 sudo pip$python_version install setuptools
 echo "Installing powerline..."
-sudo pip$python_version install --user git+git://github.com/Lokaltog/powerline
-
+if pip$python_version list --format=legacy | grep  powerline; then
+	echo "powerline found."
+else
+	sudo pip$python_version install --user git+git://github.com/Lokaltog/powerline
+fi
 #############################################################
 # Adding to Path
 #############################################################
@@ -54,13 +58,12 @@ repository_root=$(pip$python_version show powerline-status | grep 'Location' | c
 echo "repository_root: $repository_root"
 # 1) Fish:
 if echo $shells | grep -q fish ; then
-	if [ -z $fish_config_file ]; then
+	if [ -f $fish_config_file ]; then
 		if [ ! -f ./install_fish.sh ]; then
 			wget https://github.com/mohab1989/my_scripts/blob/master/install_fish.sh
 		fi
 		echo "Running install_fish.sh"
 		source ./install_fish.sh
-		fish_config_file=$(which fish)
 	fi
 	if grep -q powerline-setup $fish_config_file; then
 		echo "fish powerline binding already added to $fish_config_file"
@@ -68,7 +71,7 @@ if echo $shells | grep -q fish ; then
 		echo "Adding powerline binding script inside $fish_config_file"
 		echo "
 		set fish_function_path \$fish_function_path \"$repository_root/powerline/bindings/fish\"
-		powerline-setup" | sudo tee $fish_config_file #>> $fish_config_file 
+		powerline-setup" >> $fish_config_file 
 	fi
 fi
 
@@ -79,7 +82,7 @@ if echo $shells | grep -q bash ; then
 	else
 		echo "Adding powerline binding script inside $bash_config_file"
 		echo "
-		source $repository_root/powerline/bindings/bash/powerline.sh" | sudo tee $bash_config_file #>> $bash_config_file 
+		source $repository_root/powerline/bindings/bash/powerline.sh" >> $bash_config_file 
 	fi
 fi
 
