@@ -60,7 +60,7 @@ echo "repository_root: $repository_root"
 if echo $shells | grep -q fish ; then
 	if [ -f $fish_config_file ]; then
 		if [ ! -f ./install_fish.sh ]; then
-			wget https://github.com/mohab1989/my_scripts/blob/master/install_fish.sh
+			wget https://raw.githubusercontent.com/mohab1989/my_scripts/master/install_fish.sh
 		fi
 		echo "Running install_fish.sh"
 		source ./install_fish.sh
