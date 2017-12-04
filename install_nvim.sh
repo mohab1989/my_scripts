@@ -1,4 +1,4 @@
-ip_version=$1
+pip_version=$1
 if [ $pip_version -eq "3" ];then
     python_version="python3"
 else
