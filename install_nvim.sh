@@ -7,7 +7,7 @@ fi
 
 vim_plug_directory=~/.local/share/nvim/site/autoload/
 plugins_directory=~/.local/share/nvim/plugged
-you_complete_me_directory=$plugins_directory'/you_complete_me/'
+you_complete_me_directory=$plugins_directory'/YouCompleteMe/'
 global_ycm_extra_conf=$you_complete_me_directory'.ycm_extra_conf.py'
 plug_vim_file=$vim_plug_directory'plug.vim'
 
@@ -34,6 +34,9 @@ sudo apt-get install neovim
 # Installing neovim python client
 sudo -H pip$pip_version install neovim
 
+# Install xclip to allow for copy cut and paste in nvim using os clipboard
+sudo apt-get install xclip
+
 # Make directory for init.vim 
 mkdir -p $nvim_config_dir
 
@@ -52,25 +55,7 @@ if grep -q "call plug#begin" $nvim_config_file;then
 else
 	echo "adding plugins to to neovim"
 # Writing the nvim configuration file (nvim) 
-	echo "
-\" Set location of global_ycm_extra_conf to configure you complete me to use c++ standard libabry
-let g:ycm_global_ycm_extra_conf="$global_ycm_extra_conf"
-
-\" To enable xclip to use os clipboard for copy cut paste operations
-set clipboard+=unnamedplus
-
-\" Enable lines numbering
-set number
-
-\" Highlight width of text at 80 charachters point
-set textwidth=80
-
-\" Make control-N hotkey to open NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
-\" Make hidden files shown by default in NERDTree
-let NERDTreeShowHidden=1
-	
+	echo "	
 \" Specify a directory for plugins
 \" - For Neovim: ~/.local/share/nvim/plugged
 \" - Avoid using standard Vim directory names like 'plugin'
@@ -104,6 +89,11 @@ Plug 'Valloric/YouCompleteMe', { 'do': '$python_version install.py --clang-compl
 \" Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
+\" Lean & mean status/tabline for vim that's light as air with its themes
+\"https://github.com/vim-airline/vim-airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -126,16 +116,37 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 \" Plug my-prototype-plugin'
 
 \" Initialize plugin system
-call plug#end()" >> $nvim_config_file
+call plug#end()
+
+\" Set location of global_ycm_extra_conf to configure you complete me to use c++ standard libabry
+let g:ycm_global_ycm_extra_conf = '$global_ycm_extra_conf'
+
+\" To enable xclip to use os clipboard for copy cut paste operations
+set clipboard+=unnamedplus
+
+\" Enable lines numbering
+set number
+
+\" Highlight width of text at 80 charachters point
+set textwidth=80
+
+\" Make control-N hotkey to open NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+\" Make hidden files shown by default in NERDTree
+let NERDTreeShowHidden=1
+
+\" set airline theme: https://github.com/vim-airline/vim-airline/wiki/Screenshots
+let g:airline_theme='luna'" >> $nvim_config_file
 fi
 
 # Run PlugInstall to install all plugins
 nvim +PlugInstall
 
-if [! -f $global_ycm_extra_conf ];then
+if [ ! -f $global_ycm_extra_conf ];then
 	echo "Get global_ycm_extra_conf"
-	curl -fLo $you_complete_me_directory \
+	curl -fLo $global_ycm_extra_conf \
 	https://raw.githubusercontent.com/mohab1989/my_scripts/master/dot_files/.ycm_extra_conf.py
-	else
+else
 	echo "global_ycm_extra_conf already exists"
 fi
