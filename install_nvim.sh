@@ -38,7 +38,7 @@ mkdir -p $nvim_config_dir
 # Installing vim-plug
 if [ ! -f $plug_vim_file ]; then
 	echo "Downloading plug.vim..."
-    curl -fLo $vim_plug_directory --create-dirs \
+    curl -fLo $plug_vim_file --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 else
 	echo "plug.vim already installed"
