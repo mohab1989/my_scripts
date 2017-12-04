@@ -1,4 +1,4 @@
-pip_version=$1
+ip_version=$1
 if [ $pip_version -eq "3" ];then
     python_version="python3"
 else
@@ -7,6 +7,8 @@ fi
 
 vim_plug_directory=~/.local/share/nvim/site/autoload/
 plugins_directory=~/.local/share/nvim/plugged
+you_complete_me_directory=$plugins_directory'/you_complete_me/'
+global_ycm_extra_conf=$you_complete_me_directory'.ycm_extra_conf.py'
 plug_vim_file=$vim_plug_directory'plug.vim'
 
 # Make directory for neovim config file init.vim (.vimrc)
@@ -49,10 +51,25 @@ if grep -q "call plug#begin" $nvim_config_file;then
 	echo "plug begin already added to init.vim"
 else
 	echo "adding plugins to to neovim"
+# Writing the nvim configuration file (nvim) 
 	echo "
-let g:ycm_global_ycm_extra_conf="~/ycm_extra_conf.py"
+\" Set location of global_ycm_extra_conf to configure you complete me to use c++ standard libabry
+let g:ycm_global_ycm_extra_conf="$global_ycm_extra_conf"
 
+\" To enable xclip to use os clipboard for copy cut paste operations
+set clipboard+=unnamedplus
+
+\" Enable lines numbering
+set number
+
+\" Highlight width of text at 80 charachters point
+set textwidth=80
+
+\" Make control-N hotkey to open NERDTree
 map <C-n> :NERDTreeToggle<CR>
+
+\" Make hidden files shown by default in NERDTree
+let NERDTreeShowHidden=1
 	
 \" Specify a directory for plugins
 \" - For Neovim: ~/.local/share/nvim/plugged
@@ -87,14 +104,13 @@ Plug 'Valloric/YouCompleteMe', { 'do': '$python_version install.py --clang-compl
 \" Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 \" Multiple Plug commands can be written in a single line using | separators
 \" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-\" On-demand loading
+\" On-and loading
 \" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 \" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
@@ -103,12 +119,23 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 \" Plug 'fatih/vim-go', { 'tag': '*' }
 
 \" Plugin options
-\" Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+\" Plug nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 
 \" Unmanaged plugin (manually installed and updated)
-\" Plug '~/my-prototype-plugin'
+\" Plug my-prototype-plugin'
 
 \" Initialize plugin system
 call plug#end()" >> $nvim_config_file
+fi
+
+# Run PlugInstall to install all plugins
+nvim +PlugInstall
+
+if [! -f $global_ycm_extra_conf ];then
+	echo "Get global_ycm_extra_conf"
+	curl -fLo $you_complete_me_directory \
+	https://raw.githubusercontent.com/mohab1989/my_scripts/master/dot_files/.ycm_extra_conf.py
+	else
+	echo "global_ycm_extra_conf already exists"
 fi
