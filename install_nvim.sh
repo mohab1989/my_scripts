@@ -134,8 +134,8 @@ nvim +PlugInstall
 
 if [! -f $global_ycm_extra_conf ];then
 	echo "Get global_ycm_extra_conf"
-	curl -fLo $you_complete_me_directory \ 
-	https://raw.githubusercontent.com/mohab1989/my_scripts/dot_files/master/.ycm_extra_conf.py
-else
+	curl -fLo $you_complete_me_directory \
+	https://raw.githubusercontent.com/mohab1989/my_scripts/master/dot_files/.ycm_extra_conf.py
+	else
 	echo "global_ycm_extra_conf already exists"
 fi
