@@ -8,29 +8,32 @@ while [[ $# -gt 0 ]]
 do
 key="$1"
 case $key in
-    -p|python)
-    python='$key'
-    shift # past argument
-    shift # past value
-    ;;
-    o|overwrite)
-    overwrite=true
-    shift # past argument
-    ;;
-    --default)
-    DEFAULT=YES
-    shift # past argument
-    ;;
-    *)    # unknown option
-    POSITIONAL+=("$1") # save it in an array for later
-    shift # past argument
-    ;;
+	-p|--python)
+	if [ $2 = python2 | $2 = python3 ]; then
+		python="$2"
+	fi	
+	shift # past argument
+	shift # past value
+	;;
+	o|overwrite)
+	overwrite=true
+	shift # past argument
+	;;
+	--default)
+	DEFAULT=YES
+	shift # past argument
+	;;
+	*)    # unknown option
+	POSITIONAL+=("$1") # save it in an array for later
+	shift # past argument
+	;;
 esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-echo python use is: ${python}
-echo overwrite existing init.vim: ${overwrite}
+echo python in use is: ${python}
+echo overwrite existing iniVt.vim: ${overwrite}
+
 
 plugins_directory=~/.local/share/nvim/plugged
 global_ycm_extra_conf=$plugins_directory'/YouCompleteMe/.ycm_extra_conf.py'
@@ -41,6 +44,10 @@ libclang_directory=$(echo $(find /usr -type f -name "libclang-*.so*") |  awk '{p
 # Make directory for neovim config file init.vim (.vimrc)
 nvim_config_dir=~/.config/nvim/
 nvim_config_file=$nvim_config_dir'init.vim'
+if [ $overwrite = true ]; then
+	echo "removing $nvim_config_dir"
+	rm nvim_config_file
+fi
 
 echo "	
 \" Specify a directory for plugins
@@ -63,13 +70,14 @@ Plug 'scrooloose/nerdtree'
 \" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
-\" It's an interactive Unix filter for command-line that can be used with any list; \" files, command history, processes, hostnames, bookmarks, git commits, etc.
+\" It's an interactive Unix filter for command-line that can be used with any list; 
+\" files, command history, processes, hostnames, bookmarks, git commits, etc.
 \" https://github.com/junegunn/fzf
 \" Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'do': './install --all' }
 
 \" Install YouCompleteMe clang completer for c/c++ autocompletion
-Plug 'Valloric/YouCompleteMe', { 'do': '$python_version install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': '$python install.py --clang-completer' }
 
 \" YouCompleteMe Generator, generates dependancies so that YCM can use them in
 \" autocompletion
@@ -85,7 +93,8 @@ Plug 'arakashic/chromatica.nvim'
 Plug 'vim-airline/vim-ne'
 Plug 'vim-airline/vim-airline-themes'
 
-\" Any valid git URL is allowed\" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+\" Any valid git URL is allowed
+\" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 \" Multiple Plug commands can be written in a single line using | separators
 \" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'

@@ -51,11 +51,13 @@ fi
 
 # adding plugins to init .vim
 if grep -q "call plug#begin" $nvim_config_file;then
-	echo "plug begin already added to init.vim"
+	echo "plug begin already added to init.vim overwriting existing init.Vim"
+# OverWrite previous init.vim
+	source update_init.vim.sh o --python $python_version
 else
 	echo "adding plugins to to neovim"
-# Writing the nvim configuration file (nvim) 
-	source update_init.vim.sh
+# appending to existing file or making a new one 
+	source update_init.vim.sh --python $python_version
 fi
 
 # Run PlugInstall to install all plugins
