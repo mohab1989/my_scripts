@@ -9,9 +9,12 @@ do
 key="$1"
 case $key in
 	-p|--python)
-	if [ $2 = python2 | $2 = python3 ]; then
+	if [ $2 = 'python2' ] || [ $2 = 'python3' ];then
 		python="$2"
-	fi	
+	else
+		echo "Values for -p / --python argument is either python2 or python3"
+		exit 128
+	fi
 	shift # past argument
 	shift # past value
 	;;
@@ -31,8 +34,8 @@ esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-echo python in use is: ${python}
-echo overwrite existing iniVt.vim: ${overwrite}
+echo python use is: ${python}
+echo overwrite existing init.vim: ${overwrite}
 
 
 plugins_directory=~/.local/share/nvim/plugged
@@ -46,7 +49,10 @@ nvim_config_dir=~/.config/nvim/
 nvim_config_file=$nvim_config_dir'init.vim'
 if [ $overwrite = true ]; then
 	echo "removing $nvim_config_dir"
-	rm nvim_config_file
+	rm $nvim_config_file
+	echo "Writing new init.vim file"
+else
+	echo "Append/Create init.vim"
 fi
 
 echo "	
@@ -90,7 +96,7 @@ Plug 'arakashic/chromatica.nvim'
 
 \" Lean & mean status/tabline for vim that's light as air with its themes
 \"https://github.com/vim-/vim-airline
-Plug 'vim-airline/vim-ne'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 \" Any valid git URL is allowed
@@ -141,7 +147,7 @@ let g:chromatica#enable_at_startup=1
 \" Provide highlight level 
 \" 0 = basic semantic highlight with default vim syntax
 \" 1 = gets more detailed highlight from libclang with a customized syntax file
-g:chromatica#highlight_feature_level=1
+let g:chromatica#highlight_feature_level=1
 
 \" Activate chromatica responsive mode to change highlight in nvim insert mode
 let g:chromatica#responsive_mode=1
@@ -151,3 +157,5 @@ let NERDTreeShowHidden=1
 
 \" set airline theme: https://github.com/vim-airline/vim-airline/wiki/Screenshots
 let g:airline_theme='luna'" >> $nvim_config_file
+
+echo "Done writing init.vim"
