@@ -11,6 +11,9 @@ you_complete_me_directory=$plugins_directory'/YouCompleteMe/'
 global_ycm_extra_conf=$you_complete_me_directory'.ycm_extra_conf.py'
 plug_vim_file=$vim_plug_directory'plug.vim'
 
+# Search for libclang and get its file path 
+libclang_directory=$(echo $(find /usr -type f -name "libclang-*.so*") |  awk '{print $1;}')
+
 # Make directory for neovim config file init.vim (.vimrc)
 nvim_config_dir=~/.config/nvim/
 nvim_config_file=$nvim_config_dir'init.vim'
@@ -89,6 +92,10 @@ Plug 'Valloric/YouCompleteMe', { 'do': '$python_version install.py --clang-compl
 \" Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
+\" Clang based syntax highlight engine for Neovim
+\" https://github.com/arakashic/chromatica.nvim
+Plug 'arakashic/chromatica.nvim'
+
 \" Lean & mean status/tabline for vim that's light as air with its themes
 \"https://github.com/vim-airline/vim-airline
 Plug 'vim-airline/vim-airline'
@@ -132,6 +139,20 @@ set textwidth=80
 
 \" Make control-N hotkey to open NERDTree
 map <C-n> :NERDTreeToggle<CR>
+
+\" Tell chromatica where to find libclang
+let g:chromatica#libclang_path = '$libclang_directory'
+
+\" Chromatica is enabled at startup
+let g:chromatica#enable_at_startup=1
+
+\" Provide highlight level 
+\" 0 = basic semantic highlight with default vim syntax
+\" 1 = gets more detailed highlight from libclang with a customized syntax file
+g:chromatica#highlight_feature_level=1
+
+\" Activate chromatica responsive mode to change highlight in nvim insert mode
+let g:chromatica#responsive_mode=1
 
 \" Make hidden files shown by default in NERDTree
 let NERDTreeShowHidden=1
