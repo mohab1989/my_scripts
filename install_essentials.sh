@@ -15,3 +15,23 @@ sudo apt-get install python-dev python-pip python3-dev python3-pip
 
 sudo -H pip install --upgrade pip
 sudo -H pip3 install --upgrade pip
+
+# Install gtest and gmock
+# Installs the headers at /usr/include/(gtest\gmock)
+sudo apt-get install libgtest-dev google-mock
+
+# build gtest
+cd /usr/src/gtest
+mkdir build && cd build && cmake ..
+
+# Move gtest libs to /usr/lib
+sudo mv *.a /usr/lib
+cd .. && sudo rm build -rf
+
+# build gmock
+cd /usr/src/gmock
+mkdir build && cd build && cmake ..
+
+# Move gmock libs to /usr/lib
+sudo mv *.a /usr/lib
+cd .. && sudo rm build -rf
