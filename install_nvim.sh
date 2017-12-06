@@ -37,6 +37,10 @@ sudo -H pip$pip_version install neovim
 # Install xclip to allow for copy cut and paste in nvim using os clipboard
 sudo apt-get install xclip
 
+# Install nerd fonts so that vim-devicon can find them 
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+
 # Make directory for init.vim 
 mkdir -p $nvim_config_dir
 

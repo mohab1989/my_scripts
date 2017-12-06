@@ -99,6 +99,10 @@ Plug 'arakashic/chromatica.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+\" VimDevIcons - Add Icons to Your Plugins
+\" https://github.com/ryanoasis/vim-devicons
+Plug 'ryanoasis/vim-devicons'
+
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -156,6 +160,15 @@ let g:chromatica#responsive_mode=1
 let NERDTreeShowHidden=1
 
 \" set airline theme: https://github.com/vim-airline/vim-airline/wiki/Screenshots
-let g:airline_theme='luna'" >> $nvim_config_file
+let g:airline_theme='luna'
+
+\" Enable powerline fonts
+let g:airline_powerline_fonts = 1
+
+\" Set encoding to UTF-8 to show glyphs (for icons in VimDevIcons)
+set encoding=utf8
+
+\" Set Vim font to a Nerd Font 
+set guifont=DroidSansMono\ Nerd\ Font\ 11" >> $nvim_config_file
 
 echo "Done writing init.vim"
