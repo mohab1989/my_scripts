@@ -103,6 +103,9 @@ Plug 'vim-airline/vim-airline-themes'
 \" https://github.com/ryanoasis/vim-devicons
 Plug 'ryanoasis/vim-devicons'
 
+\" cmake autocompletion
+Plug 'https://github.com/richq/vim-cmake-completion.git'
+
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 

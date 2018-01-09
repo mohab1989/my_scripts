@@ -70,8 +70,9 @@ if echo $shells | grep -q fish ; then
 	else
 		echo "Adding powerline binding script inside $fish_config_file"
 		echo "
-		set fish_function_path \$fish_function_path \"$repository_root/powerline/bindings/fish\"
-		powerline-setup" >> $fish_config_file 
+# Bind fish with powerline and run powerline
+set fish_function_path \$fish_function_path \"$repository_root/powerline/bindings/fish\"
+powerline-setup" >> $fish_config_file 
 	fi
 fi
 

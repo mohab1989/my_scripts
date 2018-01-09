@@ -9,7 +9,12 @@ config_file=$config_file_dir$config_file_name
 if [ ! -f $config_file ]; then
 	echo "Createing config file '$config_file'..."
 	mkdir -p $config_file_dir
-	echo "set -g -x fish_greeting ''" >> $config_file
+	echo "
+# Change fish greeting message to empty string
+set -g -x fish_greeting ''
+
+# Setup aliases for frequently used commands
+source ~/.alias" >> $config_file
 else
 	echo "Found existing config '$config_file'"
 fi
