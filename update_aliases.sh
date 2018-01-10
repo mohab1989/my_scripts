@@ -10,4 +10,5 @@ fi
 echo "overwrite: $overwrite"
 
 echo "
-alias clcmake='cmake -G \'Unix Makefiles\' -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++'" >> $alias_file
+alias clcmake='cmake -G \'Unix Makefiles\' -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++'
+alias gcmake='cmake -G \'Unix Makefiles\' -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=gcc++'" >> $alias_file

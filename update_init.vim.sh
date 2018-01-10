@@ -106,6 +106,9 @@ Plug 'ryanoasis/vim-devicons'
 \" cmake autocompletion
 Plug 'https://github.com/richq/vim-cmake-completion.git'
 
+\" nerdcommenter to support commenting
+Plug 'scrooloose/nerdcommenter'
+
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -172,6 +175,14 @@ let g:airline_powerline_fonts = 1
 set encoding=utf8
 
 \" Set Vim font to a Nerd Font 
-set guifont=DroidSansMono\ Nerd\ Font\ 11" >> $nvim_config_file
+set guifont=DroidSansMono\ Nerd\ Font\ 11
+
+filetype plugin indent on
+\" show existing tab with 4 spaces width
+set tabstop=4
+\" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+\" On pressing tab, insert 4 spaces
+set expandtab" >> $nvim_config_file
 
 echo "Done writing init.vim"

@@ -6,6 +6,13 @@ config_file_dir=~/.config/fish/
 config_file_name=config.fish
 config_file=$config_file_dir$config_file_name
 
+if [ ! -f update_aliases ]
+then
+	wget https://raw.githubusercontent.com/mohab1989/my_scripts/master/update_aliases.sh 
+fi
+
+bas:h update_aliases.sh o
+
 if [ ! -f $config_file ]; then
 	echo "Createing config file '$config_file'..."
 	mkdir -p $config_file_dir
