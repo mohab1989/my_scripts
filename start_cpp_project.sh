@@ -11,7 +11,7 @@ target_type="executable"        # values: executable | static_lib |
 cxx_standard="11r"              # values: (98/ 11/ 14/ 17)r 
                                 # if r cxx_standard is required
 cxx_standard_required=OFF
-create_testing_project=true
+disable_testing=false
 #########################################################################
 ############################# parse inputs ##############################
 #########################################################################
@@ -59,7 +59,7 @@ case $key in
     shift # past value
     ;;
     dt|disable_testing)
-    disable_testing=false
+    disable_testing=true
     shift # past argument
     ;;
     --default)
@@ -165,3 +165,11 @@ set_target_properties(${project_name} PROPERTIES
     CXX_STANDARD_REQUIRED $cxx_standard_required
     CXX_EXTENSIONS OFF
 )">>CMakeLists.txt
+
+if [ $disable_testing = false ];
+then
+echo
+"
+
+">>CMakeLists.txt
+fi
