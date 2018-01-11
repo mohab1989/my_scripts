@@ -99,6 +99,13 @@ Plug 'arakashic/chromatica.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+\" Add folding plugin
+Plug 'Konfekt/FastFold'
+
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+
 \" VimDevIcons - Add Icons to Your Plugins
 \" https://github.com/ryanoasis/vim-devicons
 Plug 'ryanoasis/vim-devicons'
@@ -132,7 +139,8 @@ Plug 'scrooloose/nerdcommenter'
 
 \" Initialize plugin system
 call plug#end()
-
+\" Set the folding method work on indent
+set foldmethod=indent
 \" Set location of global_ycm_extra_conf to configure you complete me to use c++ standard libabry
 let g:ycm_global_ycm_extra_conf = '$global_ycm_extra_conf'
 
