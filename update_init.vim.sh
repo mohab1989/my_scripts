@@ -99,9 +99,22 @@ Plug 'arakashic/chromatica.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+\" Add folding plugin
+Plug 'Konfekt/FastFold'
+
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+
 \" VimDevIcons - Add Icons to Your Plugins
 \" https://github.com/ryanoasis/vim-devicons
 Plug 'ryanoasis/vim-devicons'
+
+\" cmake autocompletion
+Plug 'https://github.com/richq/vim-cmake-completion.git'
+
+\" nerdcommenter to support commenting
+Plug 'scrooloose/nerdcommenter'
 
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
@@ -126,7 +139,8 @@ Plug 'ryanoasis/vim-devicons'
 
 \" Initialize plugin system
 call plug#end()
-
+\" Set the folding method work on indent
+set foldmethod=indent
 \" Set location of global_ycm_extra_conf to configure you complete me to use c++ standard libabry
 let g:ycm_global_ycm_extra_conf = '$global_ycm_extra_conf'
 
@@ -169,6 +183,14 @@ let g:airline_powerline_fonts = 1
 set encoding=utf8
 
 \" Set Vim font to a Nerd Font 
-set guifont=DroidSansMono\ Nerd\ Font\ 11" >> $nvim_config_file
+set guifont=DroidSansMono\ Nerd\ Font\ 11
+
+filetype plugin indent on
+\" show existing tab with 4 spaces width
+set tabstop=4
+\" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+\" On pressing tab, insert 4 spaces
+set expandtab" >> $nvim_config_file
 
 echo "Done writing init.vim"

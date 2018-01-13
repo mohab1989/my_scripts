@@ -6,10 +6,22 @@ config_file_dir=~/.config/fish/
 config_file_name=config.fish
 config_file=$config_file_dir$config_file_name
 
+if [ ! -f update_aliases ]
+then
+	wget https://raw.githubusercontent.com/mohab1989/my_scripts/master/update_aliases.sh 
+fi
+
+bas:h update_aliases.sh o
+
 if [ ! -f $config_file ]; then
 	echo "Createing config file '$config_file'..."
 	mkdir -p $config_file_dir
-	echo "set -g -x fish_greeting ''" >> $config_file
+	echo "
+# Change fish greeting message to empty string
+set -g -x fish_greeting ''
+
+# Setup aliases for frequently used commands
+source ~/.alias" >> $config_file
 else
 	echo "Found existing config '$config_file'"
 fi

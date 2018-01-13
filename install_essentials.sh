@@ -44,9 +44,18 @@ if [ ! -f /usr/lib/libgmock.a ];then
 	cd .. && sudo rm build -rf
 fi
 
+
 # Installing TeXLive Latex viewer
 #wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 #tar -xzf install-tl-unx.tar.gz
 #rm install-tl-unx.tar.gz 
 #cd install-tl-20180106/
 #sudo ./install-tl
+
+# Install doxygen
+#git clone https://github.com/doxygen/doxygen.git
+#mkdir build_linux
+#cd build_linux
+#cmake -G "Unix Makefiles" ..
+#make
+#sudo make install
