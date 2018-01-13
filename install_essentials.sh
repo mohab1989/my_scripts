@@ -20,7 +20,7 @@ sudo -H pip3 install --upgrade pip
 # Installs the headers at /usr/include/(gtest\gmock)
 sudo apt-get install libgtest-dev google-mock
 
-#check libgtest.a exists already
+# Check libgtest.a exists already
 if [ ! -f /usr/lib/libgtest.a ];then
 	
 	# build gtest
@@ -32,7 +32,7 @@ if [ ! -f /usr/lib/libgtest.a ];then
 	cd .. && sudo rm build -rf
 fi
 
-#check libgmock.a exists already
+# Check libgmock.a exists already
 if [ ! -f /usr/lib/libgmock.a ];then 
 	
 	# build gmock
@@ -43,3 +43,10 @@ if [ ! -f /usr/lib/libgmock.a ];then
 	sudo mv *.a /usr/lib
 	cd .. && sudo rm build -rf
 fi
+
+# Installing TeXLive Latex viewer
+#wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+#tar -xzf install-tl-unx.tar.gz
+#rm install-tl-unx.tar.gz 
+#cd install-tl-20180106/
+#sudo ./install-tl
