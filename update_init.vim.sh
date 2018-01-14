@@ -190,6 +190,9 @@ let NERDTreeShowHidden=1
 color luna
 colorscheme luna
 
+\" force vim color
+set termguicolors
+
 \" set airline theme: https://github.com/vim-airline/vim-airline/wiki/Screenshots
 let g:airline_theme='luna'
 
