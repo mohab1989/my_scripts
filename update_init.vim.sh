@@ -116,6 +116,10 @@ Plug 'https://github.com/richq/vim-cmake-completion.git'
 \" nerdcommenter to support commenting
 Plug 'scrooloose/nerdcommenter'
 
+\" get luna color
+\" https://github.com/notpratheek/vim-luna.git
+Plug 'notpratheek/vim-luna'
+
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -172,6 +176,10 @@ let g:chromatica#responsive_mode=1
 
 \" Make hidden files shown by default in NERDTree
 let NERDTreeShowHidden=1
+
+\"set colorscheme
+color luna
+colorscheme luna
 
 \" set airline theme: https://github.com/vim-airline/vim-airline/wiki/Screenshots
 let g:airline_theme='luna'

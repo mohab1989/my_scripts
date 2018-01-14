@@ -167,7 +167,6 @@ def FlagsForFile(filename):
     if compilation_db_flags:
         final_flags = compilation_db_flags
     else:
-        BASE_FLAGS.append(stdDir)
         final_flags = BASE_FLAGS
         clang_flags = FlagsForClangComplete(root)
         if clang_flags:
@@ -175,6 +174,7 @@ def FlagsForFile(filename):
         include_flags = FlagsForInclude(root)
         if include_flags:
             final_flags = final_flags + include_flags
+        final_flags.append(stdDir)
     return {
             'flags': final_flags,
             'do_cache': True
