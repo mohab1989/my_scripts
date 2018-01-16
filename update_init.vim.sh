@@ -85,10 +85,19 @@ Plug 'junegunn/fzf', { 'do': './install --all' }
 \" Install YouCompleteMe clang completer for c/c++ autocompletion
 Plug 'Valloric/YouCompleteMe', { 'do': '$python install.py --clang-completer' }
 
+\" Update Ycm generator template
+function! UpdateYcmTemplate(info)
+    !wget https://raw.githubusercontent.com/mohab1989/my_scripts/master/my_custom_files/ycm_generator_updated_template.py
+    !diff template.py ycm_generator_updated_template.py > template.diff
+    !patch template.py template.diff
+    !rm template.diff ycm_generator_updated_template.py
+endfunction
+
+
 \" YouCompleteMe Generator, generates dependancies so that YCM can use them in
 \" autocompletion
 \" Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' , 'do': function('UpdateYcmTemplate') }
 
 \" Clang based syntax highlight engine for Neovim
 \" https://github.com/arakashic/chromatica.nvim
@@ -115,6 +124,10 @@ Plug 'https://github.com/richq/vim-cmake-completion.git'
 
 \" nerdcommenter to support commenting
 Plug 'scrooloose/nerdcommenter'
+
+\" get luna color
+\" https://github.com/notpratheek/vim-luna.git
+Plug 'notpratheek/vim-luna'
 
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
@@ -172,6 +185,13 @@ let g:chromatica#responsive_mode=1
 
 \" Make hidden files shown by default in NERDTree
 let NERDTreeShowHidden=1
+
+\"set colorscheme
+color luna
+colorscheme luna
+
+\" force vim color
+set termguicolors
 
 \" set airline theme: https://github.com/vim-airline/vim-airline/wiki/Screenshots
 let g:airline_theme='luna'

@@ -20,6 +20,9 @@ if [ ! -f $config_file ]; then
 # Change fish greeting message to empty string
 set -g -x fish_greeting ''
 
+# Make fish use 256 colors  
+set fish_term256 1
+
 # Setup aliases for frequently used commands
 source ~/.alias" >> $config_file
 else
