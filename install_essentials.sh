@@ -60,6 +60,10 @@ fi
 #cd install-tl-20180106/
 #sudo ./install-tl
 
+# Install cpplint to check for gogle tyle guide
+sudo pip3 install cpplint --user 
+sudo pip2 install cpplint --user 
+
 # Install doxygen
 #git clone https://github.com/doxygen/doxygen.git
 #mkdir build_linux

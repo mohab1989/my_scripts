@@ -129,6 +129,14 @@ Plug 'scrooloose/nerdcommenter'
 \" https://github.com/notpratheek/vim-luna.git
 Plug 'notpratheek/vim-luna'
 
+\" Install Google style guide checker
+Plug 'funorpain/vim-cpplint'
+
+\" Install Google style formatter
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -152,6 +160,7 @@ Plug 'notpratheek/vim-luna'
 
 \" Initialize plugin system
 call plug#end()
+call glaive#Install()
 \" Set the folding method work on indent
 set foldmethod=indent
 \" Set location of global_ycm_extra_conf to configure you complete me to use c++ standard libabry
@@ -211,6 +220,13 @@ set tabstop=4
 \" when indenting with '>', use 4 spaces width
 set shiftwidth=4
 \" On pressing tab, insert 4 spaces
-set expandtab" >> $nvim_config_file
+set expandtab
+\" enable list chars to replace tabs and spaces
+set list
+\" replace tabs and spaces with '>'and '.'
+:set lcs=space:.,tab:>-
+
+\" map ctrl-s key to save file
+:inoremap <c-s> <Esc>:w<CR>  " >> $nvim_config_file
 
 echo "Done writing init.vim"
