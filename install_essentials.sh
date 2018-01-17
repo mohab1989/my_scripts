@@ -44,6 +44,10 @@ if [ ! -f /usr/lib/libgmock.a ];then
 	cd .. && sudo rm build -rf
 fi
 
+# Install cpplint to check for gogle tyle guide
+sudo pip3 install cpplint --user 
+sudo pip2 install cpplint --user 
+
 # Install doxygen
 git clone https://github.com/doxygen/doxygen.git
 mkdir build_linux
