@@ -239,7 +239,7 @@ set_target_properties(${testing_project_name} PROPERTIES
 enable_testing()
 add_test(${project_name}_test testing_project_name)
 endif()
-">CMakeLists.txt
+">>CMakeLists.txt
 fi
 
 #########################################################################
