@@ -190,6 +190,9 @@ ${add_target} \${SOURCE_FILES})
 # Add include directories
 target_include_directories(${project_name} PUBLIC \${PROJECT_SOURCE_DIR}/include)
 
+# linking with threads library to enable multithreading 
+target_link_libraries(${project_name} Threads::Threads)
+
 # Set some properties (standard)
 set_target_properties(${project_name} PROPERTIES
     CXX_STANDARD $cxx_standard
@@ -231,7 +234,7 @@ add_executable(${testing_project_name} \${TESTING_SOURCES})
 target_include_directories(${testing_project_name} PUBLIC \${PROJECT_SOURCE_DIR}/include \${GTEST_INCLUDE_DIRS} \${GMOCK_INCLUDE_DIRS})
 
 # Link with Gtest and GMock libs
-target_link_libraries(${testing_project_name} GTest::GTest GTest::Main \${GMOCK_BOTH_LIBRARIES})
+target_link_libraries(${testing_project_name} GTest::GTest GTest::Main \${GMOCK_BOTH_LIBRARIES} Threads::Threads)
 
 set_target_properties(${testing_project_name} PROPERTIES
     CXX_STANDARD $cxx_standard
