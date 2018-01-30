@@ -11,13 +11,13 @@ bash_config_file=~/.bashrc
 #############################################################
 sudo apt-get install python$python_version
 sudo apt-get install python$python_version-pip git
-sudo pip$python_version install --upgrade pip
-sudo pip$python_version install setuptools
+sudo -H pip$python_version install --upgrade pip
+sudo -H pip$python_version install setuptools
 echo "Installing powerline..."
 if pip$python_version list --format=legacy | grep  powerline; then
 	echo "powerline found."
 else
-	sudo pip$python_version install --user git+git://github.com/Lokaltog/powerline
+	sudo pip$python_version install --user git+git://github.com/powerline/powerline
 fi
 #############################################################
 # Adding to Path
@@ -25,12 +25,11 @@ fi
 echo "Adding '$HOME/.local/bin' to PATH in ~/.profile"
 if grep -q PATH=\"\$HOME/.local/bin:\$PATH\" ~/.profile; then
     echo "'$HOME/.local/bin' already exists in ~/.profile PATH"
-    else
+else
     echo "
-	if [ -d \"\$HOME/.local/bin\" ]; then
-    	PATH=\"\$HOME/.local/bin:\$PATH\"
-	fi" \ 
->> ~/.profile
+if [ -d \"\$HOME/.local/bin\" ]; then
+	PATH=\"\$HOME/.local/bin:\$PATH\"
+fi">> ~/.profile
 fi
 
 #############################################################
@@ -54,7 +53,7 @@ fi
 # Adding powerline scripts to config files
 # (vim,bash,zsh,fish,tmux)
 #############################################################
-repository_root=$(pip$python_version show powerline-status | grep 'Location' | cut -d' ' -f2)
+repository_root=$(pip$python_version show powerline-status | grep -i 'Location' | cut -d' ' -f2)
 echo "repository_root: $repository_root"
 # 1) Fish:
 if echo $shells | grep -q fish ; then

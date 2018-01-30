@@ -159,9 +159,6 @@ then
 fi
 cxx_standard=${cxx_standard:0:2}
 
-# Remove previously made CMakeLists.txt
-rm CMakeLists.txt
-
 # Generate CMakeLists.txt file
 echo "
 # Set cmake minimum version required
@@ -201,7 +198,7 @@ set_target_properties(${project_name} PROPERTIES
     )
 # Export compile command json file for use with source trail and YCM
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-">>CMakeLists.txt
+">CMakeLists.txt
 
 if [ $disable_testing = false ];
 then
