@@ -119,6 +119,10 @@ let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
 \" https://github.com/ryanoasis/vim-devicons
 Plug 'ryanoasis/vim-devicons'
 
+\" Install nerd-fonts
+\" https://github.com/ryanoasis/nerd-fonts
+Plug 'ryanoasis/nerd-fonts', { 'do': './install.sh' }
+
 \" cmake autocompletion
 Plug 'https://github.com/richq/vim-cmake-completion.git'
 
