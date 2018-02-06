@@ -231,6 +231,9 @@ set list
 :set lcs=space:.,tab:>-
 
 \" map ctrl-s key to save file
-:inoremap <c-s> <Esc>:w<CR>  " >> $nvim_config_file
+:inoremap <c-s> <Esc>:w<CR>
+
+\"map p to be able to paste same register multiple times.
+xnoremap p pgvy">> $nvim_config_file
 
 echo "Done writing init.vim"
