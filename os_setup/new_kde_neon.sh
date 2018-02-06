@@ -55,6 +55,7 @@ bash install_nvim.sh 3
 
 #### Install Qt #####
 wget http://download.qt.io/official_releases/qt/5.10/5.10.0/qt-opensource-linux-x64-5.10.0.run
+chmod +x qt-opensource-linux-x64-5.10.0.run
 ./qt-opensource-linux-x64-5.10.0.run
 
 #### Install LibreOffice ####
