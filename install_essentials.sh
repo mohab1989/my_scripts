@@ -12,6 +12,9 @@ sudo apt-get install clang-${clang_version}
 sudo link /usr/bin/clang-${clang_version}  /usr/bin/clang 
 sudo link /usr/bin/clang++-${clang_version}  /usr/bin/clang++ 
 
+#install openmp lib for clang
+sudo apt-get install libomp-dev
+
 # To be able to use add-apt-repository you may need to install software-properties-common
 sudo apt-get install software-properties-common
 
