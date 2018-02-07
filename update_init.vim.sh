@@ -55,7 +55,7 @@ else
 	echo "Append/Create init.vim"
 fi
 
-echo "	
+echo "
 \" Specify a directory for plugins
 \" - For Neovim: ~/.local/share/nvim/plugged
 \" - Avoid using standard Vim directory names like 'plugin'
@@ -177,7 +177,8 @@ set clipboard+=unnamedplus
 set number
 
 \" Highlight width of text at 80 charachters point
-set textwidth=80
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 \" Make control-N hotkey to open NERDTree
 map <C-n> :NERDTreeToggle<CR>
