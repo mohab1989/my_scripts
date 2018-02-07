@@ -176,6 +176,9 @@ set clipboard+=unnamedplus
 \" Enable lines numbering
 set number
 
+" Make Vim case insesitive
+set ignorecase
+
 \" Highlight width of text at 80 charachters point
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
