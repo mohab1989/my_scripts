@@ -176,7 +176,7 @@ set clipboard+=unnamedplus
 \" Enable lines numbering
 set number
 
-" Make Vim case insesitive
+\" Make Vim case insesitive
 set ignorecase
 
 \" Highlight width of text at 80 charachters point
@@ -236,6 +236,9 @@ set list
 
 \" map ctrl-s key to save file
 :inoremap <c-s> <Esc>:w<CR>
+
+\" map F3 to YcmCompleter Goto
+:map <F3> :YcmCompleter GoTo<CR>
 
 \"map p to be able to paste same register multiple times.
 xnoremap p pgvy">> $nvim_config_file
