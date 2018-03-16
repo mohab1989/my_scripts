@@ -1,7 +1,17 @@
 #!/bin/bash
+os=$(bash get_linux_distro.sh)
+echo "Linux Distro: $os"
 
 echo "Installing Fish..."
-sudo apt-get install fish
+if [ "$os" == "Antergos Linux" ]
+then
+    echo "Antergos: using pacman"
+    sudo pacman -S fish
+else
+    echo "not Antergos"
+    sudo apt-get install fish
+fi
+
 fish_path=$(which fish) 
 
 config_file_dir=~/.config/fish/
