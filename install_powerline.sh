@@ -6,18 +6,25 @@ python_version=$2
 echo "using python_version $2"
 fish_config_file=~/.config/fish/config.fish
 bash_config_file=~/.bashrc
+os=$(bash get_linux_distro.sh)
 #############################################################
 # Installing pip and powerline per user
 #############################################################
-sudo apt-get install python$python_version
-sudo apt-get install python$python_version-pip git
+if [ "$os" == "Antergos Linux" ]
+then
+    sudo pacman -S python-pip
+else
+    sudo apt-get install python$python_version
+    sudo apt-get install python$python_version-pip git
+fi
+
 sudo -H pip$python_version install --upgrade pip
 sudo -H pip$python_version install setuptools
 echo "Installing powerline..."
-if pip$python_version list --format=legacy | grep  powerline; then
+if pip$python_version list --format=legacy | grep  powerline-status; then
 	echo "powerline found."
 else
-	sudo pip$python_version install --user git+git://github.com/powerline/powerline
+	pip$python_version install --user git+git://github.com/powerline/powerline
 fi
 #############################################################
 # Adding to Path
