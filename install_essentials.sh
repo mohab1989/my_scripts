@@ -70,14 +70,32 @@ fi
 #cd install-tl-20180106/
 #sudo ./install-tl
 
-# Install cpplint to check for gogle tyle guide
+# Install cpplint to check for google style guide
 sudo pip3 install cpplint --user 
 sudo pip2 install cpplint --user 
 
 # Install doxygen
-#git clone https://github.com/doxygen/doxygen.git
-#mkdir build_linux
-#cd build_linux
-#cmake -G "Unix Makefiles" ..
-#make
-#sudo make install
+if [ ! -f /usr/local/bin/doxygen ]
+then
+    if [ ! -d ./doxygen ]
+    then
+        git clone https://github.com/doxygen/doxygen.git
+    fi
+cd doxygen
+mkdir build_linux
+cd build_linux
+cmake -G "Unix Makefiles" ..
+make -j
+sudo make install
+#check return code to see if installation were successfull
+    if [ $? == 0 ]
+    then 
+        echo 'Doxygen installation successful'
+        echo 'removing downloaded data'
+        cd ../..
+        rm ./doxygen -rf
+    else
+        echo 'Doxygen installation failed'
+        echo 'keep downloaded data'
+    fi  
+fi

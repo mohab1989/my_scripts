@@ -18,8 +18,8 @@ sudo apt-get install git-all
 
 
 #### Make terminal case insensitive ####
-# If ~./inputrc doesn't exist yet, first include te original /etc/inputrc so we don't override it
-if [ ! -a ~/.inputrc ]; then echo '$include /etc/inputrc' > ~/.inputrc; fi
+# If ~./inputrc doesn't exist yet, first include to original /etc/inputrc so we don't override it
+if [ ! -f ~/.inputrc ]; then echo '$include /etc/inputrc' > ~/.inputrc; fi
 
 # Add option to ~/.inputrc to enable case-insensitive tab completion
 echo 'set completion-ignore-case On' >> ~/.inputrc

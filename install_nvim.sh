@@ -1,11 +1,13 @@
 #!/bin/bash
 pip_version=$1
+python_arch="python"
 if [ $pip_version -eq "3" ];then
-    python_version="python3"
+    python_version="3"
 else
     python_version="python2"
+    python_arch="2"
 fi
-
+os=$(bash get_linux_distro.sh)
 vim_plug_directory=~/.local/share/nvim/site/autoload/
 plugins_directory=~/.local/share/nvim/plugged
 global_ycm_extra_conf=$plugins_directory'/YouCompleteMe/.ycm_extra_conf.py'
@@ -15,27 +17,32 @@ plug_vim_file=$vim_plug_directory'plug.vim'
 nvim_config_dir=~/.config/nvim/
 nvim_config_file=$nvim_config_dir'init.vim'
 
-if [ ! -f install_essentials.sh ];then
-    echo "Get install install_essentials.sh"
-    wget https://raw.githubusercontent.com/mohab1989/my_scripts/master/install-essentials.sh
+if [ "$os" == "Antergos Linux" ]
+then
+    sudo pacman -S neovim $python_arch-neovim xclip
+else
+    if [ ! -f install_essentials.sh ];then
+        echo "Get install install_essentials.sh"
+        wget https://raw.githubusercontent.com/mohab1989/my_scripts/master/install-essentials.sh
+    fi
+
+    # Installng essentials like python and pip
+    source ./install_essentials.sh
+f
+    # Add neovim repo to apt package manager
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt-get update
+
+    # Installing neovim with apt
+    echo "Install nvim with python$python_version support"
+    sudo apt-get install neovim
+
+    # Installing neovim python client
+    sudo -H pip$pip_version install neovim
+
+    # Install xclip to allow for copy cut and paste in nvim using os clipboard
+    sudo apt-get install xclip  
 fi
-
-# Installng essentials like python and pip
-source ./install_essentials.sh
-
-# Add neovim repo to apt package manager
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt-get update
-
-# Installing neovim with apt
-echo "Install nvim with $python_version support"
-sudo apt-get install neovim
-
-# Installing neovim python client
-sudo -H pip$pip_version install neovim
-
-# Install xclip to allow for copy cut and paste in nvim using os clipboard
-sudo apt-get install xclip
 
 # Install nerd fonts so that vim-devicon can find them 
 mkdir -p ~/.local/share/fonts
@@ -53,15 +60,18 @@ else
 	echo "plug.vim already installed"
 fi
 
+#return to my_scripts directory
+cd -
+
 # adding plugins to init .vim
 if grep -q "call plug#begin" $nvim_config_file;then
 	echo "plug begin already added to init.vim overwriting existing init.Vim"
 # OverWrite previous init.vim
-	source update_init.vim.sh o --python $python_version
+	source update_init.vim.sh o --python python$python_version
 else
 	echo "adding plugins to to neovim"
 # appending to existing file or making a new one 
-	source update_init.vim.sh --python $python_version
+	source update_init.vim.sh --python python$python_version
 fi
 
 # Run PlugInstall to install all plugins
