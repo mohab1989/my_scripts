@@ -83,7 +83,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', { 'do': './install --all' }
 
 \" Install YouCompleteMe clang completer for c/c++ autocompletion
-Plug 'Valloric/YouCompleteMe', { 'do': '$python install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': '$python install.py --clang-completer --system-libclang' }
 
 \" Update Ycm generator template
 function! UpdateYcmTemplate(info)
