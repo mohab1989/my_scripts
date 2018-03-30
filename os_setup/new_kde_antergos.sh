@@ -13,6 +13,8 @@ sudo pacman -S openmp
 
 sudo pacman python2-pip python-pip
 
+pip3 install sympy --user 
+
 sudo pacman -S gtest gmock
 
 # Check libgtest.a exists already
