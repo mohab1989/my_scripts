@@ -42,7 +42,7 @@ plugins_directory=~/.local/share/nvim/plugged
 global_ycm_extra_conf=$plugins_directory'/YouCompleteMe/.ycm_extra_conf.py'
 
 # Search for libclang and get its file path 
-libclang_directory=$(echo $(find /usr/lib -type f -name "libclang*.so.*") |  awk '{print $1;}')
+libclang_directory=$(echo $(find /usr/lib -type f -name "libclang.so.*") |  awk '{print $1;}')
 
 # Make directory for neovim config file init.vim (.vimrc)
 nvim_config_dir=~/.config/nvim/
