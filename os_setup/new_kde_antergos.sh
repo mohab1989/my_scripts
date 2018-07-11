@@ -9,6 +9,7 @@ echo 'set completion-ignore-case On' >> ~/.inputrc
 
 ########## Install dev tools ##########
 sudo pacman -S clang
+sudo pacman -S lldb
 sudo pacman -S openmp 
 
 sudo pacman -S python2-pip python-pip
