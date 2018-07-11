@@ -11,7 +11,7 @@ echo 'set completion-ignore-case On' >> ~/.inputrc
 sudo pacman -S clang
 sudo pacman -S openmp 
 
-sudo pacman python2-pip python-pip
+sudo pacman -S python2-pip python-pip
 
 pip3 install sympy --user 
 
