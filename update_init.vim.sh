@@ -141,6 +141,9 @@ Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 
+\"lldb debbuging integration
+Plug 'dbgx/lldb.nvim'
+
 \" Any valid git URL is allowed
 \" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -240,7 +243,18 @@ set list
 \" map F3 to YcmCompleter Goto
 :map <F3> :YcmCompleter GoTo<CR>
 
-\"map p to be able to paste same register multiple times.
-xnoremap p pgvy">> $nvim_config_file
+\" map p to be able to paste same register multiple times.
+xnoremap p pgvy
+
+\" maps for lldb debuggr
+nmap <M-b> <Plug>LLBreakSwitch
+vmap <F2> <Plug>LLStdInSelected
+nnoremap <F4> :LLstdin<CR>
+nnoremap <F5> :LLmode debug<CR>
+nnoremap <S-F5> :LLmode code<CR>
+nnoremap <F8> :LL continue<CR>
+nnoremap <S-F8> :LL process interrupt<CR>
+nnoremap <F9> :LL print <C-R>=expand('<cword>')<CR>
+vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<CR><CR>">> $nvim_config_file
 
 echo "Done writing init.vim"
