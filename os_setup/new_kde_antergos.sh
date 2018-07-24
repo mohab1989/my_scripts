@@ -80,4 +80,4 @@ sudo pacman -S partitionmanager
 yaourt -S skypeforlinux-stable-bin
 yaourt -S teamviewer   
 sudo teamviewer --daemon enable
-
+sudo pacman -S kmail
