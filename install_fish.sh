@@ -7,6 +7,10 @@ if [ "$os" == "Antergos Linux" ]
 then
     echo "Antergos: using pacman"
     sudo pacman -S fish
+elif [ "$os" == "Manjaro Linux" ]
+then
+    echo "Manjaro: using pacman"
+    sudo pacman -S fish
 else
     echo "not Antergos"
     sudo apt-get install fish
