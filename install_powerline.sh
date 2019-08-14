@@ -13,6 +13,9 @@ os=$(bash get_linux_distro.sh)
 if [ "$os" == "Antergos Linux" ]
 then
     sudo pacman -S python-pip
+elif [ "$os" == "Manjaro Linux" ]
+then
+    sudo pacman -S python-pip
 else
     sudo apt-get install python$python_version
     sudo apt-get install python$python_version-pip git
